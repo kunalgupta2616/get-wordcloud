@@ -1,0 +1,60 @@
+Prerequisites -
+1. Create an account on Github, and download Git (CLI).
+2. Create an account on Heroku Website and downlaod Heroku CLI.
+3. pip
+
+Steps to deploy an Streamlit app:
+1. Code a Streamlit Webapp using any editor. I have created on VS Code.
+   (I have already written the code)
+2. Create an Empty Github Repository.
+3. Go to CLI (I use Gitbash) and run Git init. 
+4. Clone the repository in your local machine using git clone <repo url>.
+
+5. Now make changes in your local machine and make sure to add the following files.
+ Necessary Files:
+ - your_app.py (Streamlit app Code goes here)
+ - requirements.txt (includes all dependencies)
+   for requirements.txt
+   *  Open Command prompt in Admin Mode and pip install pipreqs.
+   *  cd into cloned repo directory
+   *  type pipreqs requirements.txt and press enter. Requirements.txt will be created
+
+6. Procfile (without any extension with same name as it is case sensitive)
+    copy and paste below contents in the Procfile 
+    web: sh setup.sh && streamlit run your_app.py
+
+7. setup.sh (Bash Script file)  - extension - .sh
+     copy and paste below contents in the setup.sh
+   
+mkdir -p ~/.streamlit/
+
+echo "\
+[general]\n\
+email = \"your_email_address\"\n\
+" > ~/.streamlit/credentials.toml
+
+echo "\
+[server]\n\
+headless = true\n\
+enableCORS=false\n\
+port = $PORT\n\
+" > ~/.streamlit/config.toml
+
+
+Our File tree is ready. 
+Since our github repo only contains a README.md as we have make all changes in 
+cloned repo on our machine we need to synchronize both. 
+
+8. Go to the repo directory in CLI usind cd and enter the following commands linewise.
+- git add *
+- git commit -m "commit message goes here"
+- git push
+
+9. Now for Deployment - on the same CLI enter following commands.
+- heroku login
+        enter any key except q
+- heroku create app-name    (app-name is any name we want to give to our app)
+- heroku push origin master
+
+10. App is deployed. :)
+    
